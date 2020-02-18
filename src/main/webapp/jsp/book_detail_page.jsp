@@ -6,8 +6,7 @@
     <title>Book detail page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <c:import url="header.jsp" />
@@ -42,7 +41,7 @@
               <td>Authors:</td>
               <td>
                 <c:forEach var="author_name" items="${book_authors_name}">
-                   <a href="/online-library/authors?action=search&search_name=<c:out value='${author_name}' />">
+                   <a href="/online-library/authors?name=<c:out value='${author_name}' />">
                       <c:out value="${author_name}"/>
                    </a>
                    <span>, </span>
@@ -58,5 +57,6 @@
 <div style= "visibility: hidden; height: 180px;" >
 </div>
 <c:import url="footer.jsp" />
+
 </body>
 </html

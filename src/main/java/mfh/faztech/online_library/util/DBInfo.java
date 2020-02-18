@@ -8,7 +8,7 @@ public class DBInfo {
     static {
         jdbcURL = "jdbc:mysql://localhost:3306/new_db";
         jdbcUsername = "root";
-        jdbcPassword = "111111frost";
+        jdbcPassword = "bcvhh";
     }
 
     public static String getJdbcURL() {

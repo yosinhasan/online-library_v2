@@ -23,6 +23,7 @@ import java.sql.SQLException;
 public class AuthorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("hello AuthorServlet");
         try {
             this.execute(request);
         } catch (SQLException e) {

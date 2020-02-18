@@ -24,13 +24,14 @@ import java.sql.SQLException;
 public class BookServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("hello Book SErvlet");
         try {
             this.execute(request);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         String refer_to_page = (String) request.getAttribute("refer_to_page");
-        if (refer_to_page.contains("/authors?action=search&search_name=")) {
+        if (refer_to_page.contains("/authors?name=")) {
             RequestDispatcher rd = getServletContext().getRequestDispatcher(refer_to_page);
             rd.forward(request, response);
             return;

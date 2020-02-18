@@ -1,8 +1,0 @@
-mfh/faztech/online_library/repository/impl/MySQLAuthorRepositoryImpl.class
-mfh/faztech/online_library/repository/impl/MySQLBookRepositoryImpl.class
-mfh/faztech/online_library/web/fabric/AuthorFabric.class
-mfh/faztech/online_library/service/impl/AuthorServiceImpl.class
-mfh/faztech/online_library/web/AuthorServlet.class
-mfh/faztech/online_library/web/filter/IndexFilter.class
-mfh/faztech/online_library/web/fabric/BookFabric.class
-mfh/faztech/online_library/web/BookServlet.class

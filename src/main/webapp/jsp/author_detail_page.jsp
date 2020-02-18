@@ -6,8 +6,6 @@
     <title>Author detail page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
     img {
         padding-left: 50px;
@@ -48,7 +46,7 @@
               <td>Books</td>
               <td>
                 <c:forEach var="book_name" items="${author_books_name}">
-                   <a href="/online-library/books?action=search&search_name=<c:out value='${book_name}' />">
+                   <a href="/online-library/books?name=<c:out value='${book_name}' />">
                       <c:out value="${book_name}"/>
                    </a>
                    <span>, </span>

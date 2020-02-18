@@ -1,3 +1,4 @@
+/home/fazliddin/IdeaProjects/online_library/src/main/java/mfh/faztech/online_library/web/filter/IndexFilter.java
 /home/fazliddin/IdeaProjects/online_library/src/main/java/mfh/faztech/online_library/repository/AuthorRepository.java
 /home/fazliddin/IdeaProjects/online_library/src/main/java/mfh/faztech/online_library/service/impl/BookServiceImpl.java
 /home/fazliddin/IdeaProjects/online_library/src/main/java/mfh/faztech/online_library/service/BaseService.java
@@ -5,7 +6,6 @@
 /home/fazliddin/IdeaProjects/online_library/src/main/java/mfh/faztech/online_library/repository/BaseRepository.java
 /home/fazliddin/IdeaProjects/online_library/src/main/java/mfh/faztech/online_library/util/DBInfo.java
 /home/fazliddin/IdeaProjects/online_library/src/main/java/mfh/faztech/online_library/service/BookService.java
-/home/fazliddin/IdeaProjects/online_library/src/main/java/mfh/faztech/online_library/web/SearchServlet.java
 /home/fazliddin/IdeaProjects/online_library/src/main/java/mfh/faztech/online_library/util/ServiceContainer.java
 /home/fazliddin/IdeaProjects/online_library/src/main/java/mfh/faztech/online_library/util/DBUtil.java
 /home/fazliddin/IdeaProjects/online_library/src/main/java/mfh/faztech/online_library/web/AuthorServlet.java

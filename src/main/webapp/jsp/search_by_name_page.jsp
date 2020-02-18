@@ -7,8 +7,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <c:import url="header.jsp" />
@@ -17,9 +15,8 @@
   <form action="/online-library/books">
      <div class="form-group">
         <label for="search">Name</label>
-        <input class="form-control input-lg" id="search" name="search_name"
+        <input class="form-control input-lg" id="search" name="name"
             minlength=3 type="text" placeholder = "type name of searched one strait here ... " />
-        <input type="hidden" name="action" value="search" />
       </div>
       <div class="container">
         <button type="submit" class="btn btn-info btn-lg">Search</button>

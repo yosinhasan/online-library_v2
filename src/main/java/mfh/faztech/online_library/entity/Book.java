@@ -6,61 +6,61 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Book {
-    protected int mId;
-    protected String mName;
-    private String mDescription;
-    private LocalDate mDateOfPublish;
-    private Set<Integer> mAuthors = new HashSet<>();
+    protected int id;
+    protected String name;
+    private String description;
+    private LocalDate dateOfPublish;
+    private Set<Integer> authors = new HashSet<>();
 
     public Book() {
     }
 
-    public Book(int mId, String mName, String mDescription, LocalDate mDateOfPublish) {
-        this.mId = mId;
-        this.mName = mName;
-        this.mDescription = mDescription;
-        this.mDateOfPublish = mDateOfPublish;
-        this.mAuthors = mAuthors;
+    public Book(int id, String name, String description, LocalDate dateOfPublish) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.dateOfPublish = dateOfPublish;
+        this.authors = authors;
     }
 
     public int getId() {
-        return mId;
+        return id;
     }
 
     public void setId(int mId) {
-        this.mId = mId;
+        this.id = mId;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public void setName(String mName) {
-        this.mName = mName;
+        this.name = mName;
     }
 
     public String getDescription() {
-        return mDescription;
+        return description;
     }
 
     public void setDescription(String mDescription) {
-        this.mDescription = mDescription;
+        this.description = mDescription;
     }
 
     public LocalDate getDateOfPublish() {
-        return mDateOfPublish;
+        return dateOfPublish;
     }
 
     public void setDateOfPublish(LocalDate mDateOfPublish) {
-        this.mDateOfPublish = mDateOfPublish;
+        this.dateOfPublish = mDateOfPublish;
     }
 
     public Set<Integer> getAuthors() {
-        return mAuthors;
+        return authors;
     }
 
     public void setAuthors(Set<Integer> mAuthors) {
-        this.mAuthors = mAuthors;
+        this.authors = mAuthors;
     }
 
     @Override
@@ -69,24 +69,24 @@ public class Book {
         if (!(o instanceof Book)) return false;
         if (!super.equals(o)) return false;
         Book book = (Book) o;
-        return mDescription.equals(book.mDescription) &&
-                mDateOfPublish.equals(book.mDateOfPublish) &&
-                mAuthors.equals(book.mAuthors);
+        return description.equals(book.description) &&
+                dateOfPublish.equals(book.dateOfPublish) &&
+                authors.equals(book.authors);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), mDescription, mDateOfPublish, mAuthors);
+        return Objects.hash(super.hashCode(), description, dateOfPublish, authors);
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "Id=" + mId +
-                ", Name='" + mName + '\'' +
-                ", Description='" + mDescription + '\'' +
-                ", LocalDate=" + mDateOfPublish +
-                ", Authors=" + mAuthors +
+                "Id=" + id +
+                ", Name='" + name + '\'' +
+                ", Description='" + description + '\'' +
+                ", LocalDate=" + dateOfPublish +
+                ", Authors=" + authors +
                 '}';
     }
 }

@@ -24,9 +24,13 @@ public class BookFabric {
         this.mAuthorService = authorService;
     }
 
-
     public HttpServletRequest execute(HttpServletRequest request) throws SQLException {
-        String action = request.getParameter("action");
+        String action = "main";
+        if (request.getParameter("id") != null) {
+            action = "bookDetail";
+        } else if (request.getParameter("name") != null) {
+            action = "search";
+        }
 
         request.removeAttribute("list_books");
         request.removeAttribute("book");
@@ -45,20 +49,20 @@ public class BookFabric {
                 request.setAttribute("list_books", this.listBooks());
                 break;
             case "bookDetail":
-                int id = Integer.parseInt(request.getParameter("book_id"));
+                int id = Integer.parseInt(request.getParameter("id"));
                 request.setAttribute("book", this.findBookById(id));
                 request.setAttribute("book_authors_name", this.findAuthorsByBookId(id));
                 refer_to_page = Path.BOOK_DETAIL_PAGE;
                 break;
             case "search":
-                String book_name = request.getParameter("search_name").trim();
+                String book_name = request.getParameter("name").trim();
                 Book bookToFind = this.findBookByName(book_name);
                 if (bookToFind != null) {
                     request.setAttribute("book_authors_name", this.findAuthorsByBookId(bookToFind.getId()));
                     request.setAttribute("book", bookToFind);
                     refer_to_page = Path.BOOK_DETAIL_PAGE;
                 } else {
-                    refer_to_page = "/authors?action=search&search_name=" + book_name;
+                    refer_to_page = "/authors?name=" + book_name;
                 }
 
                 break;

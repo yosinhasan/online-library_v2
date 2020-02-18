@@ -25,7 +25,12 @@ public class AuthorFabric {
     }
 
     public HttpServletRequest execute(HttpServletRequest request) throws SQLException {
-        String action = request.getParameter("action");
+        String action = "main";
+        if (request.getParameter("id") != null) {
+            action = "bookDetail";
+        } else if (request.getParameter("name") != null) {
+            action = "search";
+        }
 
         request.removeAttribute("list_books");
         request.removeAttribute("book");
@@ -44,13 +49,13 @@ public class AuthorFabric {
                 request.setAttribute("list_authors", this.listAuthors());
                 break;
             case "authorDetail":
-                int id = Integer.parseInt(request.getParameter("author_id"));
+                int id = Integer.parseInt(request.getParameter("id"));
                 request.setAttribute("author", this.findAuthorById(id));
                 request.setAttribute("author_books_name", this.findBooksByAuthorId(id));
                 refer_to_page = Path.AUTHOR_DETAIL_PAGE;
                 break;
             case "search":
-                String author_name = request.getParameter("search_name");
+                String author_name = request.getParameter("name");
                 Author authorToFind = this.findAuthorByName(author_name);
                 if (authorToFind != null) {
                     request.setAttribute("author_books_name", this.findBooksByAuthorId(authorToFind.getId()));

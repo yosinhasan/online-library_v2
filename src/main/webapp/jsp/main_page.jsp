@@ -7,11 +7,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <c:import url="header.jsp" />
+
 <div class="jumbotron text-center">
   <h1>Online Library</h1>
   <p>Totally free for people who like to read </p>
@@ -26,7 +25,7 @@
            <div class="col-sm-4">
                 <img src="/online-library/img/book2.jpeg" class="img-thumbnail" alt="no image" />
                 <h3 class ="text-center">
-                    <a href="books?action=bookDetail&book_id=<c:out value='${book.id}' />">
+                    <a href="books?id=<c:out value='${book.id}' />">
                         <c:out value="${book.name}"/>
                     </a>
                 </h3>
