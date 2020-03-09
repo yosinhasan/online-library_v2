@@ -1,16 +1,16 @@
 package mfh.faztech.online_library.entity;
 
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 public class Book {
     protected int id;
     protected String name;
     private String description;
     private LocalDate dateOfPublish;
-    private Set<Integer> authors = new HashSet<>();
+    private Map<Integer, String> authors = new HashMap<>();
 
     public Book() {
     }
@@ -55,12 +55,12 @@ public class Book {
         this.dateOfPublish = mDateOfPublish;
     }
 
-    public Set<Integer> getAuthors() {
+    public Map<Integer, String> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(Set<Integer> mAuthors) {
-        this.authors = mAuthors;
+    public void setAuthors(Map<Integer, String> authors) {
+        this.authors = authors;
     }
 
     @Override

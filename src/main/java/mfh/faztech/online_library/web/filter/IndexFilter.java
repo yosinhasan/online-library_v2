@@ -17,7 +17,7 @@ public class IndexFilter implements Filter {
     public final void doFilter(final ServletRequest request,
                                final ServletResponse response, final FilterChain chain)
             throws IOException, ServletException {
-        ((HttpServletResponse) response).sendRedirect(Path.MAIN_PAGE );
+        ((HttpServletResponse) response).sendRedirect(Path.MAIN_PAGE);
     }
 
     @Override

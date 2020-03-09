@@ -37,7 +37,7 @@ public class MySQLBookRepositoryImpl implements BookRepository {
 
         sql = "INSERT INTO relation_table (book_id, author_id) VALUES (?, ?);";
         PreparedStatement preparedStatement2 = dbUtil.getJdbcConnection().prepareStatement(sql);
-        for (Integer author_id : book.getAuthors()) {
+        for (Integer author_id : book.getAuthors().keySet()) {
             preparedStatement2.setInt(1, book.getId());
             preparedStatement2.setInt(2, author_id);
             rowInserted = rowInserted && (preparedStatement2.executeUpdate() > 0);
@@ -62,18 +62,62 @@ public class MySQLBookRepositoryImpl implements BookRepository {
     @Override
     public Book read(int id) throws SQLException {
         Book book = null;
-        String sql = "SELECT * FROM book WHERE book_id = ?";
+        String sql = "SELECT * FROM book WHERE id = ?";
         dbUtil.connect();
         PreparedStatement statement = dbUtil.getJdbcConnection().prepareStatement(sql);
         statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
-            String title = resultSet.getString("title");
-            String author = resultSet.getString("author");
-            float price = resultSet.getFloat("price");
-            int user_id = resultSet.getInt("user_id");
+            String name = resultSet.getString("name");
+            String description = resultSet.getString("description");
+            Date date = resultSet.getDate("date_of_publish");
+            LocalDate localDate = LocalDate.parse(date.toString());
+            book = new Book(id, name, description, localDate);
+        }
+        sql = "SELECT relation_table.author_id, author.name FROM relation_table cross join author on author.id = relation_table.author_id where relation_table.book_id = "+id;
+        statement = dbUtil.getJdbcConnection().prepareStatement(sql);
+   //     statement.setInt(1, id);
+        System.out.println("*** 2");
+        resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {
+            int author_id = resultSet.getInt("author_id");
+            String author_name = resultSet.getString("name");
+            book.getAuthors().put(author_id, author_name);
+        }
 
-            book = new Book();
+        resultSet.close();
+        statement.close();
+
+        return book;
+    }
+
+    @Override
+    public Book read(String name) throws SQLException {
+        Book book = null;
+        String sql = "SELECT * FROM book WHERE  name = ?";
+        dbUtil.connect();
+        PreparedStatement statement = dbUtil.getJdbcConnection().prepareStatement(sql);
+        statement.setString(1, name);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String description = resultSet.getString("description");
+            Date date = resultSet.getDate("date_of_publish");
+            LocalDate localDate = LocalDate.parse(date.toString());
+            book = new Book(id, name, description, localDate);
+        }
+        if (book == null) {
+            return book;
+        }
+        sql = "SELECT relation_table.author_id, author.name FROM relation_table cross join author on author.id = relation_table.author_id " +
+                "where relation_table.book_id = " + book.getId() + ";";
+        statement = dbUtil.getJdbcConnection().prepareStatement(sql);
+     //   statement.setInt(1, book.getId());
+        resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {
+            int author_id = resultSet.getInt("author_id");
+            String author_name = resultSet.getString("name");
+            book.getAuthors().put(author_id, author_name);
         }
 
         resultSet.close();
@@ -133,13 +177,14 @@ public class MySQLBookRepositoryImpl implements BookRepository {
             listBook.add(book);
             mapBook.put(id, book);
         }
-        sql = "SELECT * FROM relation_table;";
+        sql = "SELECT * FROM relation_table cross join author on author.id = relation_table.author_id;";
         resultSet = statement.executeQuery(sql);
         while (resultSet.next()) {
             int book_id = resultSet.getInt("book_id");
             int author_id = resultSet.getInt("author_id");
+            String author_name = resultSet.getString("name");
             if (mapBook.containsKey(book_id)) {
-                mapBook.get(book_id).getAuthors().add(author_id);
+                mapBook.get(book_id).getAuthors().put(author_id, author_name);
             }
         }
 

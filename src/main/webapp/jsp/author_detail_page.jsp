@@ -14,50 +14,51 @@
 </head>
 <body>
 <c:import url="header.jsp" />
-
-<div class="media">
-  <h2>Author detailed information</h2>
-  <div class="media-left">
-    <img src="/online-library/img/author2.jpeg" class="img-rounded" alt="no image" />
+   <div class="container">
+    <div class="media">
+      <h2>Author detailed information</h2>
+      <div class="media-left">
+        <img src="/online-library/img/author2.jpeg" class="img-rounded" alt="no image" />
+      </div>
+      <div class="media-body" >
+        <c:if test="${author != null}">
+            <table class="table table-hover">
+              <thead class="media-heading">
+                <tr>
+                  <th>Author id</th>
+                  <th><c:out value="${author.id}"/></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Name</td>
+                  <td><c:out value="${author.name}"/></td>
+                </tr>
+                <tr>
+                  <td>Second name</td>
+                  <td><c:out value="${author.secondName}"/></td>
+                </tr>
+                <tr>
+                  <td>Date of birth</td>
+                  <td><c:out value="${author.dateOfBirth}"/></td>
+                </tr>
+                <tr>
+                  <td>Books</td>
+                  <td>
+                    <c:forEach var="book" items="${author.books}">
+                       <a href="/online-library/books?id=<c:out value='${book.key}' />">
+                          <c:out value="${book.value}"/>
+                       </a>
+                       <span>, </span>
+                     </c:forEach>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+         </c:if>
+      </div>
+    </div>
   </div>
-  <div class="media-body" >
-    <c:if test="${author != null}">
-        <table class="table table-hover">
-          <thead class="media-heading">
-            <tr>
-              <th>Author id</th>
-              <th><c:out value="${author.id}"/></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Name</td>
-              <td><c:out value="${author.name}"/></td>
-            </tr>
-            <tr>
-              <td>Second name</td>
-              <td><c:out value="${author.secondName}"/></td>
-            </tr>
-            <tr>
-              <td>Date of birth</td>
-              <td><c:out value="${author.dateOfBirth}"/></td>
-            </tr>
-            <tr>
-              <td>Books</td>
-              <td>
-                <c:forEach var="book_name" items="${author_books_name}">
-                   <a href="/online-library/books?name=<c:out value='${book_name}' />">
-                      <c:out value="${book_name}"/>
-                   </a>
-                   <span>, </span>
-                 </c:forEach>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-     </c:if>
-  </div>
-</div>
 </div>
 <div style= "visibility: hidden; height: 180px;" >
 </div>

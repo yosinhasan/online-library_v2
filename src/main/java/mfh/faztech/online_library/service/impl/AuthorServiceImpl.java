@@ -28,6 +28,10 @@ public class AuthorServiceImpl implements AuthorService {
         return authorRepository.read(id);
     }
 
+    public Author find(String name) throws SQLException {
+        return authorRepository.read(name);
+    }
+
     public Author find(String email, String password) throws SQLException {
         return authorRepository.read(email, password);
     }

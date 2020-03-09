@@ -1,14 +1,11 @@
 package mfh.faztech.online_library.web;
 
-import mfh.faztech.online_library.repository.AuthorRepository;
-import mfh.faztech.online_library.repository.BookRepository;
-import mfh.faztech.online_library.repository.impl.MySQLAuthorRepositoryImpl;
+import mfh.faztech.online_library.entity.Book;
 import mfh.faztech.online_library.repository.impl.MySQLBookRepositoryImpl;
+import mfh.faztech.online_library.service.BookService;
+import mfh.faztech.online_library.service.impl.BookServiceImpl;
 import mfh.faztech.online_library.util.Path;
-import mfh.faztech.online_library.util.ServiceContainer;
-import mfh.faztech.online_library.web.fabric.BookFabric;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,21 +19,23 @@ import java.sql.SQLException;
         urlPatterns = "/books"
 )
 public class BookServlet extends HttpServlet {
+    private static BookService bookService = new BookServiceImpl(new MySQLBookRepositoryImpl());
+
+    public static BookService getBookService() {
+        return bookService;
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("hello Book SErvlet");
+
         try {
             this.execute(request);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         String refer_to_page = (String) request.getAttribute("refer_to_page");
-        if (refer_to_page.contains("/authors?name=")) {
-            RequestDispatcher rd = getServletContext().getRequestDispatcher(refer_to_page);
-            rd.forward(request, response);
-            return;
-        }
-      request.getRequestDispatcher(
+        request.removeAttribute("refer_to_page");
+        request.getRequestDispatcher(
                 refer_to_page).forward(request, response);
     }
 
@@ -46,10 +45,29 @@ public class BookServlet extends HttpServlet {
     }
 
     private HttpServletRequest execute(HttpServletRequest request) throws SQLException {
-        BookRepository bookRepository = new MySQLBookRepositoryImpl();
-        AuthorRepository authorRepository = new MySQLAuthorRepositoryImpl();
-        ServiceContainer serviceContainer = ServiceContainer.getInstance(bookRepository, authorRepository);
-        BookFabric bookFabric = new BookFabric(serviceContainer.getBookService(), serviceContainer.getAuthorService());
-        return bookFabric.execute(request);
+        String action = "main";
+        if (request.getParameter("id") != null) {
+            action = "bookDetail";
+        }
+
+        request.removeAttribute("list_books");
+        request.removeAttribute("book");
+
+        String refer_to_page = Path.MAIN_PAGE;
+        switch (action) {
+            case "main":
+                request.setAttribute("list_books", bookService.findAll());
+                break;
+            case "bookDetail":
+                int id = Integer.parseInt(request.getParameter("id"));
+                Book book = bookService.find(id);
+                request.setAttribute("book", book);
+                refer_to_page = Path.BOOK_DETAIL_PAGE;
+                    break;
+            default:
+                break;
+        }
+        request.setAttribute("refer_to_page", refer_to_page);
+        return request;
     }
 }

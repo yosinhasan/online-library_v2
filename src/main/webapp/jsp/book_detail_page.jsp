@@ -40,9 +40,9 @@
             <tr>
               <td>Authors:</td>
               <td>
-                <c:forEach var="author_name" items="${book_authors_name}">
-                   <a href="/online-library/authors?name=<c:out value='${author_name}' />">
-                      <c:out value="${author_name}"/>
+                <c:forEach var="author" items="${book.authors}">
+                   <a href="/online-library/authors?id=<c:out value='${author.key}' />">
+                      <c:out value="${author.value}"/>
                    </a>
                    <span>, </span>
                  </c:forEach>

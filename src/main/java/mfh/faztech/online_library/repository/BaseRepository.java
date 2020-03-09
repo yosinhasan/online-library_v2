@@ -13,7 +13,23 @@ public interface BaseRepository<T> {
      */
     int create(T item) throws SQLException;
 
+    /**
+     * Finds necessary item in db
+     *
+     * @param id param of item
+     * @return item
+     * @throws SQLException
+     */
     T read(int id) throws SQLException;
+
+    /**
+     * Finds necessary item in db
+     *
+     * @param name param of item
+     * @return item
+     * @throws SQLException
+     */
+    T read(String name) throws SQLException;
 
     /**
      * Saves product updates.

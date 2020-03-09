@@ -23,6 +23,10 @@ public class BookServiceImpl implements BookService {
         return bookRepository.read(id);
     }
 
+    public Book find(String name) throws SQLException {
+        return bookRepository.read(name);
+    }
+
     public boolean save(Book item) throws SQLException {
         return bookRepository.update(item);
     }
